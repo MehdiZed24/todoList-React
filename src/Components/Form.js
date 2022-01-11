@@ -4,16 +4,17 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function Form() {
   const [dataArr, setDataArr] = useState([
-    { txt: "Apprendre react", id: uuidv4() },
+    { txt: "Apprendre react", id: uuidv4() }, //On place un id sur chaque élément grâce à la librairie "uuid" importé.
     { txt: "Sport", id: uuidv4() },
     { txt: "Apprendre PHP", id: uuidv4() },
   ]);
 
   const deleteElement = (id) => {
-const filteredState = dataArr.filter(item=>{
-  return item.id !==id;
-})
-setDataArr(filteredState)
+    //prendra id en paramètre.
+    const filteredState = dataArr.filter((item) => {
+      return item.id !== id; //Va retourner un tableau avec tous les items différents de l'id cliqué
+    });
+    setDataArr(filteredState);
   };
 
   return (
@@ -29,13 +30,13 @@ setDataArr(filteredState)
       <ul className="list-group">
         {dataArr.map((item) => {
           return (
-          <Item 
-          txt={item.txt}
-          key={item.id}
-          id ={item.id}
-          delFunc={deleteElement} 
-          />
-          )
+            <Item
+              txt={item.txt}
+              key={item.id} //renvoie l'id de uuid
+              id={item.id}
+              delFunc={deleteElement} //on fait passer deleteElement en props
+            />
+          );
         })}
       </ul>
     </div>
